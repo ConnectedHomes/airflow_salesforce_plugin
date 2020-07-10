@@ -84,7 +84,8 @@ class SalesforceHook(BaseHook):
             username=self.connection.login,
             password=self.connection.password,
             security_token=self.extras['security_token'],
-            instance_url=self.connection.host
+            instance_url=self.connection.host,
+            domain=self.extras.get('domain', None) 
         )
         self.sf = sf
         return sf
