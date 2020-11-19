@@ -260,7 +260,12 @@ class SalesforceHook(BaseHook):
         # any None/np.nan values in the column
         # that's because None/np.nan cannot exist in an integer column
         # we should write all of our timestamps as FLOATS in our final schema
-        df = pd.DataFrame.from_records(query_results, exclude=["attributes"])
+        
+        try:
+            df = pd.DataFrame.from_records(query_results, exclude=["attributes"])
+        except KeyError:
+            # Create empty data frame as there are no records to extract
+            df = pd.DataFrame()
 
         df.columns = [c.lower() for c in df.columns]
 
