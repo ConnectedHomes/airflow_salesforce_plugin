@@ -4,7 +4,7 @@ from salesforce_plugin.operators.salesforce_schema_to_redshift_operator import S
 from salesforce_plugin.operators.salesforce_to_s3_operator import SalesforceBulkQueryToS3Operator
 from salesforce_plugin.operators.salesforce_to_s3_operator import SalesforceToS3Operator
 
-
+'''
 class SalesforcePlugin(AirflowPlugin):
     name = "salesforce_plugin"
     hooks = [SalesforceHook]
@@ -16,3 +16,4 @@ class SalesforcePlugin(AirflowPlugin):
     admin_views = []
     flask_blueprints = []
     menu_links = []
+'''
