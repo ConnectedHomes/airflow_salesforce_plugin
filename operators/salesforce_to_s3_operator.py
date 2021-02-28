@@ -93,6 +93,8 @@ class SalesforceToS3Operator(BaseOperator):
                                 default query creation.
                                 *Default: None*
     :type query:                string
+    :type include_deleted:      *(optional)* True if you want to 
+                                include deleted records 
     :param relationship_object: *(optional)* Some queries require
                                 relationship objects to work, and
                                 these are not the same names as
@@ -128,6 +130,7 @@ class SalesforceToS3Operator(BaseOperator):
                  relationship_object=None,
                  record_time_added=False,
                  coerce_to_timestamp=False,
+                 include_deleted=True,
                  *args,
                  **kwargs):
 
@@ -144,14 +147,15 @@ class SalesforceToS3Operator(BaseOperator):
         self.relationship_object = relationship_object
         self.record_time_added = record_time_added
         self.coerce_to_timestamp = coerce_to_timestamp
+        self.include_deleted = include_deleted
 
-    def special_query(self, query, sf_hook, relationship_object=None):
+    def special_query(self, query, include_deleted, sf_hook, relationship_object=None):
         if not query:
             raise ValueError("Query is None.  Cannot query nothing")
 
         sf_hook.sign_in()
 
-        results = sf_hook.make_query(query)
+        results = sf_hook.make_query(query,include_deleted)
         if relationship_object:
             records = []
             for r in results['records']:
@@ -194,6 +198,7 @@ class SalesforceToS3Operator(BaseOperator):
 
             if self.query:
                 query = self.special_query(self.query,
+                                           self.include_deleted,
                                            hook,
                                            relationship_object=self.relationship_object
                                            )

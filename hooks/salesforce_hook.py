@@ -101,7 +101,7 @@ class SalesforceHook(BaseHook):
         print(query)
 
         self.log.info("Querying for all objects")
-        query = self.sf.query_all(query)
+        query = self.sf.query_all(query,include_deleted)
 
         self.log.info(
             "Received results: Total size: %s; Done: %s",
