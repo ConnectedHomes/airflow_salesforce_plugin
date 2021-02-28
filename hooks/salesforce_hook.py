@@ -91,7 +91,7 @@ class SalesforceHook(BaseHook):
         self.sf = sf
         return sf
 
-    def make_query(self, query):
+    def make_query(self, query, include_deleted):
         """
         Make a query to Salesforce.  Returns result in dictionary
 
