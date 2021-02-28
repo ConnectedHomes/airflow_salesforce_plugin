@@ -130,7 +130,7 @@ class SalesforceToS3Operator(BaseOperator):
                  relationship_object=None,
                  record_time_added=False,
                  coerce_to_timestamp=False,
-                 include_deleted=True,
+                 include_deleted=False,
                  *args,
                  **kwargs):
 
